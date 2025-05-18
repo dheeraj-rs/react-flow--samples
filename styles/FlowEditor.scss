@@ -1,0 +1,225 @@
+.flow-editor-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: var(--color-background);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.flow-editor-header {
+  padding: var(--spacing-md);
+  background-color: white;
+  border-bottom: var(--border-width) solid var(--color-node-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  height: 64px;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-foreground);
+  }
+}
+
+.flow-editor-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.react-flow {
+  width: 100%;
+  height: 100%;
+}
+
+.react-flow__controls {
+  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  border: var(--border-width) solid var(--color-node-border);
+  
+  button {
+    width: 32px;
+    height: 32px;
+    background: var(--color-control-background);
+    border: none;
+    border-bottom: var(--border-width) solid var(--color-node-border);
+    color: var(--color-foreground);
+    transition: background-color var(--transition-fast);
+    
+    &:hover {
+      background: var(--color-control-hover);
+    }
+    
+    &:active {
+      background: var(--color-control-active);
+    }
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.controls-custom {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background-color: var(--color-control-background);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  border: var(--border-width) solid var(--color-node-border);
+  z-index: 10;
+  animation: fadeIn var(--transition-normal);
+  
+  .control-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-control-background);
+    color: var(--color-foreground);
+    border: none;
+    border-bottom: var(--border-width) solid var(--color-node-border);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+    
+    &:hover {
+      background: var(--color-control-hover);
+      color: var(--color-primary);
+    }
+    
+    &:active {
+      background: var(--color-control-active);
+    }
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    &.delete {
+      &:hover {
+        color: var(--color-error);
+      }
+    }
+  }
+}
+
+.boundary-indicator {
+  position: absolute;
+  border: 2px dashed rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: 5;
+  
+  &.active {
+    border-color: rgba(255, 59, 48, 0.5);
+    animation: pulse 2s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    border-color: rgba(255, 59, 48, 0.3);
+  }
+  50% {
+    border-color: rgba(255, 59, 48, 0.7);
+  }
+  100% {
+    border-color: rgba(255, 59, 48, 0.3);
+  }
+}
+
+.node-placeholder {
+  position: absolute;
+  width: 150px;
+  height: 60px;
+  background-color: rgba(0, 122, 255, 0.1);
+  border: 2px dashed var(--color-primary-light);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.auto-arrange-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn var(--transition-normal);
+  
+  .indicator {
+    background-color: white;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    animation: scaleIn var(--transition-normal);
+    
+    span {
+      font-weight: 500;
+    }
+  }
+}
+
+.mini-map {
+  position: absolute;
+  bottom: var(--spacing-md);
+  right: var(--spacing-md);
+  border: var(--border-width) solid var(--color-node-border);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background-color: white;
+  
+  .react-flow__minimap {
+    background-color: white;
+  }
+}
+
+.status-bar {
+  position: absolute;
+  bottom: var(--spacing-md);
+  left: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-control-background);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  border: var(--border-width) solid var(--color-node-border);
+  z-index: 10;
+  animation: slideInUp var(--transition-normal);
+  
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+}

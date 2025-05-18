@@ -1,0 +1,204 @@
+/* Global SCSS Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Color Variables */
+  --color-primary: #007aff;
+  --color-primary-light: #5ac8fa;
+  --color-primary-dark: #0050a0;
+  --color-secondary: #34c759;
+  --color-accent: #ff9500;
+  --color-warning: #ffcc00;
+  --color-error: #ff3b30;
+  --color-success: #34c759;
+  
+  --color-node-background: #ffffff;
+  --color-node-border: #e0e0e0;
+  --color-node-selected: rgba(0, 122, 255, 0.1);
+  --color-node-connected: rgba(52, 199, 89, 0.1);
+  --color-node-error: rgba(255, 59, 48, 0.1);
+  
+  --color-edge: #999;
+  --color-edge-selected: var(--color-primary);
+  --color-edge-connecting: var(--color-accent);
+  
+  --color-background: #f8f8f8;
+  --color-foreground: #333;
+  --color-muted: #777;
+  
+  --color-control-background: #fff;
+  --color-control-hover: #f4f4f4;
+  --color-control-active: #e9e9e9;
+  
+  /* Spacing Variables */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Shadow Variables */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Border Variables */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-width: 1px;
+
+  /* Animation Variables */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+/* React Flow specific global styles */
+.react-flow__edge-path {
+  stroke: var(--color-edge);
+  stroke-width: 2;
+  transition: stroke var(--transition-fast);
+}
+
+.react-flow__edge.selected .react-flow__edge-path,
+.react-flow__edge:focus .react-flow__edge-path,
+.react-flow__edge:focus-visible .react-flow__edge-path {
+  stroke: var(--color-edge-selected);
+  stroke-width: 3;
+}
+
+.react-flow__edge-connecting .react-flow__edge-path {
+  stroke: var(--color-edge-connecting);
+  stroke-dasharray: 5, 5;
+  animation: dash 500ms linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+.react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border: 2px solid white;
+  transition: transform var(--transition-fast);
+  
+  &:hover, &.connecting {
+    transform: scale(1.3);
+  }
+}
+
+.react-flow__handle-top {
+  top: -4px;
+}
+
+.react-flow__handle-bottom {
+  bottom: -4px;
+}
+
+.react-flow__node {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  
+  &.selected {
+    box-shadow: var(--shadow-lg) !important;
+  }
+}
+
+.react-flow__pane {
+  cursor: default;
+}
+
+.react-flow__attribution {
+  display: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Breakpoints */
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+/* Responsive Mixins */
+@mixin sm {
+  @media (min-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$breakpoint-xl}) {
+    @content;
+  }
+}
